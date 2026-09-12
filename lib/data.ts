@@ -1,4 +1,5 @@
 import { cache } from 'react';
+import { venuePhotos } from './venue-photos';
 import { isConfigured, supabase } from './supabase/server';
 import type { Service, GalleryImage, Settings } from './types';
 export const defaultSettings: Settings = {
@@ -29,7 +30,7 @@ export const getServices = cache(async (): Promise<Service[]> => {
   return data ?? [];
 });
 export const getGallery = cache(async (limit = 12): Promise<GalleryImage[]> => {
-  if (!isConfigured()) return [];
+  if (!isConfigured()) return venuePhotos.slice(0, limit);
   const db = await supabase();
   const { data, error } = await db
     .from('gallery')

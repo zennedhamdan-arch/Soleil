@@ -1763,3 +1763,433 @@ svg {
     font-size: 10px;
   }
 }
+
+/* Photo-led garden editorial: warm paper, deep foliage, restrained brass. */
+.hero {
+  padding-top: 64px;
+  padding-bottom: 66px;
+}
+.hero-art {
+  isolation: isolate;
+}
+.hero-photo-main {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+}
+.hero-photo-main img {
+  object-fit: cover;
+}
+.hero-photographs {
+  height: 565px;
+  margin-left: 16px;
+  border-radius: 0;
+}
+.hero-photographs::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  right: -14px;
+  bottom: 108px;
+  width: 67%;
+  border: 1px solid #b9bd9e;
+  border-radius: 180px 180px 4px 4px;
+  z-index: -1;
+}
+.hero-photographs .hero-photo-main {
+  left: 27%;
+  bottom: 95px;
+  border-radius: 180px 180px 3px 3px;
+  background: #dde2d1;
+}
+.hero-photographs .hero-photo-main img {
+  object-position: 50% 50%;
+  filter: saturate(0.82) contrast(0.96);
+}
+.hero-photo-inset {
+  position: absolute;
+  left: 0;
+  bottom: 105px;
+  width: 45%;
+  height: 215px;
+  overflow: hidden;
+  border: 7px solid var(--background);
+  border-radius: 4px;
+  box-shadow: 0 12px 30px #233a2420;
+}
+.hero-photo-inset img {
+  object-fit: cover;
+  filter: saturate(0.78);
+}
+.hero-photo-inset span {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 22px 10px 9px;
+  background: linear-gradient(transparent, #163822c9);
+  color: #fffdf2;
+  font-size: 7px;
+  letter-spacing: 1.6px;
+}
+.hero-photographs .round-seal {
+  top: 10px;
+  left: 16%;
+  right: auto;
+  width: 84px;
+  height: 84px;
+  background: #f1eddf;
+}
+.hero-photographs .hero-badge {
+  left: 1%;
+  bottom: 16px;
+  padding: 13px 20px;
+  box-shadow: none;
+  background: transparent;
+  border: none;
+}
+.hero-photographs .hero-badge b {
+  font-size: 21px;
+}
+.hero-photographs .hero-badge span {
+  font-size: 8px;
+  letter-spacing: 0.8px;
+}
+.hero-photo-label {
+  position: absolute;
+  bottom: 28px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-align: right;
+}
+.hero-photo-label span {
+  font-size: 7px;
+  letter-spacing: 2px;
+  color: #857b54;
+}
+.hero-photo-label i {
+  font-family: Georgia, serif;
+  font-size: 12px;
+  color: #727c62;
+}
+.hero-photographs ~ .round-seal {
+  z-index: 5;
+}
+.hero-copy .eyebrow {
+  font-size: 9px;
+}
+.wedding-art img {
+  filter: saturate(0.83);
+  object-position: center;
+}
+.wedding-panel {
+  border-radius: 5px 90px 5px 5px;
+}
+.wedding-copy {
+  background: radial-gradient(ellipse at right top, #52634450, transparent 70%), #294738;
+}
+.gallery-toolbar {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 0;
+  margin: 12px 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.gallery-toolbar .filter-tabs .active {
+  background: #294738;
+  color: #fbfaef;
+}
+.gallery-count {
+  font-size: 10px;
+  color: #81866f;
+  white-space: nowrap;
+}
+.photographic-gallery {
+  gap: 30px 24px;
+}
+.photo-card {
+  margin: 0;
+  min-width: 0;
+}
+.gallery-image-button {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.35;
+  overflow: hidden;
+  border: 0;
+  border-radius: 4px;
+  padding: 0;
+  background: #e1e5d7;
+}
+.gallery-image-button img {
+  object-fit: cover;
+  transition:
+    transform 0.6s ease,
+    filter 0.6s ease;
+  filter: saturate(0.8);
+}
+.gallery-image-button:hover img {
+  transform: scale(1.035);
+  filter: saturate(1);
+}
+.gallery-image-button::after {
+  content: '';
+  position: absolute;
+  inset: 50% 0 0;
+  background: linear-gradient(transparent, #142b263f);
+  pointer-events: none;
+}
+.photo-category {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: #fcfaf1ec;
+  padding: 4px 10px;
+  font-size: 8px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+.photo-expand {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #fffaf0e6;
+  color: #294738;
+  display: grid;
+  place-items: center;
+  z-index: 1;
+}
+.photo-card figcaption {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 15px 0 0;
+  font-family: Georgia, serif;
+  font-size: 17px;
+  line-height: 1.5;
+}
+.photo-index {
+  font:
+    9px Arial,
+    sans-serif;
+  letter-spacing: 1px;
+  color: #929779;
+}
+.photo-dialog {
+  margin: auto;
+  width: min(760px, calc(100% - 32px));
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  padding: 25px;
+  background: #f9f8f1;
+  border: 1px solid #d9ddc9;
+  border-radius: 8px;
+  color: #294738;
+}
+.photo-dialog::backdrop {
+  background: #12291ded;
+  backdrop-filter: blur(6px);
+}
+.photo-dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  letter-spacing: 1.8px;
+  margin-bottom: 18px;
+}
+.photo-dialog-image {
+  position: relative;
+  height: min(58dvh, 520px);
+  background: #eceee3;
+  border-radius: 4px;
+}
+.photo-dialog-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding-top: 22px;
+}
+.photo-dialog-footer p {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 7px;
+}
+.photo-dialog-footer h2 {
+  font-size: 25px;
+  letter-spacing: -0.3px;
+}
+.login-art {
+  background: #193a26;
+}
+.login-art::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #16372115 30%, #163721eb);
+  pointer-events: none;
+}
+.login-art img {
+  opacity: 0.85;
+  filter: saturate(0.7);
+}
+.login-art-copy {
+  z-index: 1;
+}
+@media (max-width: 1100px) {
+  .hero-photographs {
+    height: 505px;
+  }
+  .hero-photo-inset {
+    height: 175px;
+  }
+  .hero-photo-label {
+    display: none;
+  }
+  .hero-photographs .hero-badge {
+    left: 5%;
+  }
+  .hero-photographs .hero-badge b {
+    font-size: 18px;
+  }
+  .gallery-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+@media (max-width: 800px) {
+  .hero-photographs {
+    height: 440px;
+  }
+  .hero-photographs .hero-photo-main {
+    left: 16%;
+    bottom: 85px;
+  }
+  .hero-photographs .round-seal {
+    left: 0;
+    width: 65px;
+    height: 65px;
+  }
+  .hero-photo-inset {
+    width: 55%;
+    height: 155px;
+    bottom: 100px;
+    left: -5%;
+    border-width: 5px;
+  }
+  .hero-photographs .hero-badge {
+    bottom: 0;
+    left: -7%;
+    padding: 10px;
+    gap: 7px;
+  }
+  .hero-photographs .hero-badge b {
+    font-size: 16px;
+  }
+  .hero-photographs .hero-badge span {
+    font-size: 6px;
+  }
+  .photographic-gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 18px;
+  }
+}
+@media (max-width: 580px) {
+  .hero {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+  .hero-photographs {
+    height: 460px;
+    margin: 4px 15px 0 7px;
+  }
+  .hero-photographs .hero-photo-main {
+    left: 25%;
+    bottom: 92px;
+  }
+  .hero-photographs::before {
+    right: -11px;
+    bottom: 105px;
+  }
+  .hero-photo-inset {
+    width: 48%;
+    height: 167px;
+    bottom: 110px;
+    left: 0;
+    border-width: 5px;
+  }
+  .hero-photographs .round-seal {
+    left: 8%;
+    top: 5px;
+    width: 74px;
+    height: 74px;
+  }
+  .hero-photographs .hero-badge {
+    left: 8%;
+    bottom: 0;
+  }
+  .hero-photographs .hero-badge b {
+    font-size: 21px;
+  }
+  .hero-photographs .hero-badge span {
+    font-size: 8px;
+  }
+  .hero-photographs .hero-badge svg {
+    width: 29px;
+  }
+  .wedding-panel {
+    border-radius: 4px 70px 4px 4px;
+  }
+  .wedding-art {
+    min-height: 270px;
+  }
+  .photographic-gallery {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .gallery-image-button {
+    aspect-ratio: 1.4;
+  }
+  .photo-dialog {
+    padding: 16px;
+  }
+  .photo-dialog-footer {
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .photo-dialog-footer h2 {
+    font-size: 21px;
+  }
+  .photo-dialog-header {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+  .photo-dialog-header .opacity-50 {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gallery-image-button img {
+    transition: none;
+  }
+  .gallery-image-button:hover img {
+    transform: none;
+  }
+}
+.hero-photographs .round-seal span {
+  font-size: 7px;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+}

@@ -8,6 +8,7 @@ import { Button } from './ui/button';
 import { adminRequest } from './admin-actions';
 import type { Service, GalleryImage, Settings } from '@/lib/types';
 import { serviceSchema, gallerySchema, settingsSchema } from '@/lib/validation';
+import { venuePhotos, isBundledVenuePhoto } from '@/lib/venue-photos';
 export function ImageUpload({
   value,
   onChange,
@@ -69,6 +70,24 @@ export function ImageUpload({
           }
         }}
       />
+      <div className="form-field mt-4">
+        <label htmlFor="existing-venue-photo">Or choose a supplied Soleil photograph</label>
+        <select
+          id="existing-venue-photo"
+          value={isBundledVenuePhoto(value) ? value : ''}
+          disabled={busy}
+          onChange={(event) => {
+            if (event.target.value) onChange(event.target.value);
+          }}
+        >
+          <option value="">Choose from the repository photographs</option>
+          {venuePhotos.map((photo) => (
+            <option key={photo.id} value={photo.image_url}>
+              {photo.title}
+            </option>
+          ))}
+        </select>
+      </div>
       <p className="text-[10px] mt-2">
         JPEG, PNG or WebP, up to 4 MB. Automatically resized and converted to WebP. Upload only
         images you have permission to use.

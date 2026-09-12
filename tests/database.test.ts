@@ -50,6 +50,12 @@ beforeAll(async () => {
     'utf8',
   ).replace('create extension if not exists pgcrypto;', '');
   await db.exec(migration);
+  await db.exec(
+    readFileSync(
+      new URL('../supabase/migrations/202609120002_owner_photographs.sql', import.meta.url),
+      'utf8',
+    ),
+  );
   tomorrow = await offset(1);
   await db.query('insert into auth.users(id) values($1),($2)', [staff, manager]);
   await db.query(
@@ -66,6 +72,43 @@ describe.sequential('PostgreSQL schema and booking invariants', () => {
       (await db.query<{ count: number }>('select count(*)::int as count from services')).rows[0]
         .count,
     ).toBe(11);
+  });
+  it('seeds all eight owner photographs and service images without changing booking data', async () => {
+    const images = (await db.query<{ image_url: string }>('select image_url from gallery')).rows;
+    expect(images).toHaveLength(8);
+    expect(images.every((image) => image.image_url.startsWith('/images/soleil/venue-'))).toBe(true);
+    const services = (await db.query<{ image_url: string }>('select image_url from services')).rows;
+    expect(services.every((service) => service.image_url.startsWith('/images/soleil/venue-'))).toBe(
+      true,
+    );
+    expect((await db.query('select id from bookings')).rows).toHaveLength(0);
+  });
+  it('photo migration is idempotent and preserves staff changes', async () => {
+    await db.query("update gallery set active=false where image_url='/images/soleil/venue-10.jpg'");
+    await db.query(
+      "update services set image_url='/images/soleil/venue-8.jpg' where slug='birthday'",
+    );
+    await db.exec(
+      readFileSync(
+        new URL('../supabase/migrations/202609120002_owner_photographs.sql', import.meta.url),
+        'utf8',
+      ),
+    );
+    expect((await db.query('select id from gallery')).rows).toHaveLength(8);
+    expect(
+      (
+        await db.query<{ active: boolean }>(
+          "select active from gallery where image_url='/images/soleil/venue-10.jpg'",
+        )
+      ).rows[0].active,
+    ).toBe(false);
+    expect(
+      (
+        await db.query<{ image_url: string }>(
+          "select image_url from services where slug='birthday'",
+        )
+      ).rows[0].image_url,
+    ).toBe('/images/soleil/venue-8.jpg');
   });
   it('submits a pending enquiry with a readable unique reference', async () => {
     const result = await submit(tomorrow);

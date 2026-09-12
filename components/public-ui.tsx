@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { PhotoGallery } from './photo-gallery';
 import Link from 'next/link';
 import { ArrowUpRight, Leaf, MapPin, Phone, MessageCircle } from 'lucide-react';
 import { Button } from './ui/button';
@@ -94,19 +95,7 @@ export function ServiceCards({ services }: { services: Service[] }) {
 }
 export function GalleryGrid({ images }: { images: GalleryImage[] }) {
   return images.length ? (
-    <div className="gallery-grid">
-      {images.map((image) => (
-        <figure className="gallery-item" key={image.id}>
-          <Image
-            src={image.image_url}
-            alt={image.title}
-            fill
-            sizes="(max-width:580px) 50vw, 33vw"
-          />
-          <figcaption>{image.title}</figcaption>
-        </figure>
-      ))}
-    </div>
+    <PhotoGallery images={images} />
   ) : (
     <div className="empty">
       <Leaf size={30} strokeWidth={1} className="mx-auto mb-4" />

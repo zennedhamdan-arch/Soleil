@@ -17,7 +17,7 @@
 - [x] Call and WhatsApp targets; protected admin route redirects
 - [x] Dependency audit without known vulnerabilities at implementation time
 
-**These do not replace live hosted-project acceptance.** There was no Supabase project configuration or real photography in the supplied checkout.
+**These do not replace live hosted-project acceptance.** There is no Supabase project configuration in the supplied checkout. Eight real venue JPGs have since been imported from main; see `PHOTOGRAPHS.md`.
 
 ## Required before receiving real enquiries
 
@@ -45,7 +45,7 @@
 - [ ] Settings changes affect public contact details and links; manager writes are denied.
 - [ ] No service-role secret in rendered HTML, browser requests or client bundles.
 - [ ] Test network failures and session expiry during mutations; no raw DB error leakage.
-- [ ] Upload the real Soleil Garden photos; remove/replace illustration fallback naturally via gallery.
+- [ ] Apply the new photo migration to an existing database, review the eight imported photos, and replace the 163-pixel-wide thumbnails with higher-resolution originals when available.
 - [ ] Set canonical production URL, Auth URLs and all production environment values.
 - [ ] Confirm only provided business facts are published; review content and image rights.
 - [ ] Review business-specific privacy/retention obligations with an appropriate adviser.

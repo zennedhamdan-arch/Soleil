@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { isFutureDate } from './dates';
+import { isBundledVenuePhoto } from './venue-photos';
 export const futureDate = z
   .string()
   .refine((v) => isFutureDate(v), 'Choose tomorrow or a later date in Kigali.');
@@ -33,6 +34,7 @@ export const loginSchema = z.object({ email: z.email(), password: z.string().min
 export const statusSchema = z.enum(['pending', 'approved', 'rejected', 'cancelled']);
 const imageUrl = z.union([
   z.literal(''),
+  z.string().refine(isBundledVenuePhoto, 'Choose an existing venue photograph.'),
   z.url().refine((v) => {
     try {
       return (

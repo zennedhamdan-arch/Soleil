@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { venuePhotos } from '@/lib/venue-photos';
+import type { GalleryImage } from '@/lib/types';
 import { PageHeading, GalleryGrid } from '@/components/public-ui';
 import { isConfigured, supabase } from '@/lib/supabase/server';
 import { Button } from '@/components/ui/button';
@@ -14,8 +16,8 @@ export default async function Gallery({
 }) {
   const params = await searchParams;
   const category = categories.includes(params.category || '') ? params.category! : 'All';
-  const page = Math.min(10000, Math.max(1, Number(params.page) || 1));
-  let images = [];
+  const page = Math.min(10000, Math.max(1, parseInt(params.page || '1', 10) || 1));
+  let images: GalleryImage[] = [];
   let count = 0;
   if (isConfigured()) {
     const db = await supabase();
@@ -31,6 +33,12 @@ export default async function Gallery({
     if (result.error) throw new Error('The gallery is unavailable. Please try again.');
     images = result.data || [];
     count = result.count || 0;
+  } else {
+    const filtered = venuePhotos.filter(
+      (image) => category === 'All' || image.category === category,
+    );
+    count = filtered.length;
+    images = filtered.slice((page - 1) * 12, page * 12);
   }
   return (
     <div className="container pb-20">
@@ -39,12 +47,19 @@ export default async function Gallery({
         title="A glimpse of beautiful possibilities."
         description="Explore the garden and the moments shared here. Imagine the occasion you could make your own."
       />
-      <div className="filter-tabs mb-8" aria-label="Gallery categories">
-        {categories.map((c) => (
-          <Link key={c} href={`/gallery?category=${c}`} className={category === c ? 'active' : ''}>
-            {c}
-          </Link>
-        ))}
+      <div className="gallery-toolbar">
+        <div className="filter-tabs" aria-label="Gallery categories">
+          {categories.map((c) => (
+            <Link
+              key={c}
+              href={`/gallery?category=${c}`}
+              className={category === c ? 'active' : ''}
+            >
+              {c}
+            </Link>
+          ))}
+        </div>
+        <span className="gallery-count">{count} photographs · A glimpse of Soleil</span>
       </div>
       <GalleryGrid images={images} />
       {count > 12 && (

@@ -2,7 +2,7 @@
 
 A Next.js 16 application for a Kigali garden event venue: public website, five-step event enquiries, database-backed availability, Supabase authentication, and a protected venue-management workspace.
 
-**This repository contains the application, not a provisioned Supabase project.** No credentials or venue photographs were supplied. Without Supabase, public informational pages remain usable, the site shows clearly labelled botanical illustrations, and enquiries/authentication fail closed. There are no demo bookings, fabricated metrics, stock venue photographs, or pretend availability.
+**This repository contains the application, not a provisioned Supabase project.** No Supabase credentials were supplied. Eight real owner-supplied JPG photographs have now been imported from `main`. Without Supabase, public informational pages and the supplied photograph collection remain usable, while enquiries/authentication fail closed. There are no demo bookings, fabricated metrics, stock venue photographs, or pretend availability.
 
 ## Stack
 
@@ -30,7 +30,7 @@ The application listens on `0.0.0.0:3000`. Preview hosts under `*.e2b.app` and l
 ## Connect Supabase
 
 1. Create a Supabase project (use a separate staging project for testing).
-2. Apply **`supabase/migrations/202609120001_initial.sql`** in Supabase SQL Editor. Run it once against a new project. It creates tables, constraints, functions, RLS policies, Storage policies, the `venue` bucket, all eleven requested services, and the supplied public business details. It does **not** insert bookings, availability, images, prices, amenities, capacity or testimonials.
+2. Apply the SQL files in **`supabase/migrations/` in timestamp order** in Supabase SQL Editor. Run the initial migration once against a new project; existing installations should apply only the new photo migration. It creates tables, constraints, functions, RLS policies, Storage policies, the `venue` bucket, all eleven requested services, and the supplied public business details. The second migration seeds the eight owner-supplied photographs and service image assignments. Neither migration inserts bookings, availability, prices, amenities, capacity or testimonials.
 3. Set the environment variables below.
 4. Create a user in **Supabase → Authentication → Users**. Confirm the staff email through your administrative workflow. Do not add an admin registration form to the public site.
 5. Copy that user's UUID and run:
@@ -42,7 +42,7 @@ values ('REPLACE_WITH_AUTH_USER_UUID', 'REPLACE_WITH_STAFF_NAME', 'admin');
 
 Use `manager` for a staff account that can manage bookings, blocks, services and images but cannot change site settings. Profiles/roles can only be provisioned with privileged database access; users cannot promote themselves. Disable public Auth signups in the Supabase dashboard if not needed elsewhere.
 
-6. Open `/admin/login`, sign in, then upload the actual Soleil Garden photographs under Gallery. Use descriptive image titles. Set order `0` for your strongest hero image. The first active gallery image is used as the home hero. Add wedding-category photos for the wedding page, and select/upload images for each service.
+6. Open `/admin/login`, sign in, then review the imported Soleil Garden photographs under Gallery. Replace the thumbnail-size files with higher-resolution originals when available. Use descriptive image titles. Set order `0` for your strongest hero image. The first active gallery image is used as the home hero. Add wedding-category photos for the wedding page, and select/upload images for each service.
 
 ### Environment variables
 
@@ -62,7 +62,7 @@ For password recovery, use Supabase's administrative recovery tooling and a prop
 
 `/`, `/events`, `/events/[slug]`, `/weddings`, `/gallery`, `/about`, `/contact`, `/reserve`.
 
-Public event pages read **active database services**. Gallery is paginated (12/page) and category-filtered. Home fetches just three gallery images. Social links appear only when configured. Structured data contains only supplied public business facts.
+Public event pages read **active database services**. Gallery is paginated (12/page) and category-filtered. Home fetches just four gallery images and shows a three-photo gallery preview. Social links appear only when configured. Structured data contains only supplied public business facts.
 
 Enquiries proceed through event → date → details → contact → review → acknowledgement. A submitted enquiry receives a reference, **not** booking confirmation. WhatsApp is a separate conversation, not a reservation.
 
@@ -102,7 +102,7 @@ See [architecture](docs/ARCHITECTURE.md) for database invariants and trust bound
 
 Uploads are limited to **4 MB**, below Vercel's request-body ceiling including multipart overhead. JPEG/PNG/WebP files are decoded with Sharp, oriented, bounded to 2,000 pixels, stripped of metadata by re-encoding, and stored as WebP. Images over 40 million decoded pixels are rejected. SVG uploads are not allowed.
 
-Deleting a gallery entry unpublishes it; the underlying Storage object is retained to avoid breaking service image references. After checking references in both `gallery` and `services`, an administrator can remove orphan objects in Supabase Storage. See the operations guide. Public Storage images are not a place for private customer files.
+Deleting a gallery entry unpublishes it; the underlying Storage object is retained to avoid breaking service image references. After checking references in both `gallery` and `services`, an administrator can remove orphan objects in Supabase Storage. See the operations guide. Public Storage images are not a place for private customer files. Supplied repository photographs can also be selected in the editors. See [photograph provenance and setup](docs/PHOTOGRAPHS.md).
 
 ## Quality checks
 
@@ -147,9 +147,9 @@ components/ui/      shadcn-compatible UI primitive(s)
 lib/                Validation, Kigali date rules, data access, auth helpers
 proxy.ts            Supabase session refresh + first admin route guard
 supabase/migrations Database schema, functions, policies and business seed
-public/             Clearly labelled original botanical illustration
+public/             Owner-supplied JPG photographs and illustration fallback
  tests/             Unit, PostgreSQL and browser tests
  docs/              Architecture, operations and deployment acceptance
 ```
 
-No live Supabase credentials, real admin accounts, real bookings or venue photographs are included in the repository.
+No live Supabase credentials, real admin accounts or customer booking records are included in the repository. The eight venue photographs are owner-supplied assets imported from main.

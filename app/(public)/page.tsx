@@ -1,10 +1,11 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowUpRight, MapPin, Leaf, Sun, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ServiceCards, VenueArt, GalleryGrid, EventCTA } from '@/components/public-ui';
 import { getServices, getGallery } from '@/lib/data';
 export default async function Home() {
-  const [services, images] = await Promise.all([getServices(), getGallery(3)]);
+  const [services, images] = await Promise.all([getServices(), getGallery(4)]);
   return (
     <>
       <div className="container">
@@ -38,8 +39,28 @@ export default async function Home() {
               <MapPin size={13} /> Gikondo / KK35 Avenue, Kigali, Rwanda
             </div>
           </div>
-          <div className="hero-art">
-            <VenueArt image={images[0]} priority />
+          <div className={`hero-art ${images.length ? 'hero-photographs' : ''}`}>
+            <div className="hero-photo-main">
+              <VenueArt image={images[0]} priority />
+            </div>
+            {images[1] && (
+              <div className="hero-photo-inset">
+                <Image
+                  src={images[1].image_url}
+                  alt={images[1].title}
+                  fill
+                  sizes="(max-width:580px) 42vw, 235px"
+                  priority
+                />
+                <span>A GLIMPSE OF SOLEIL</span>
+              </div>
+            )}
+            {images.length > 0 && (
+              <div className="hero-photo-label">
+                <span>SOLEIL GARDEN</span>
+                <i>A moment, beautifully framed.</i>
+              </div>
+            )}
             <div className="round-seal">
               <span>LOVE. GATHER.</span>
               <Sun size={27} strokeWidth={1} />
@@ -145,7 +166,7 @@ export default async function Home() {
       <section className="container">
         <div className="wedding-panel">
           <div className="wedding-art">
-            <VenueArt image={images.find((i) => i.category === 'Weddings') || images[0]} />
+            <VenueArt image={images.filter((i) => i.category === 'Weddings')[1] || images[0]} />
           </div>
           <div className="wedding-copy">
             <div className="eyebrow">For your forever</div>
@@ -175,7 +196,7 @@ export default async function Home() {
             View the Gallery <ArrowUpRight size={14} />
           </Link>
         </div>
-        <GalleryGrid images={images} />
+        <GalleryGrid images={images.slice(1, 4)} />
       </section>
       <section className="container pb-16">
         <EventCTA />

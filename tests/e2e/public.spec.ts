@@ -73,3 +73,36 @@ test('same-origin booking requests reach server validation', async ({ request, b
   });
   expect(response.status()).toBe(400);
 });
+
+test('supplied photographs load and the gallery viewer supports keyboard navigation', async ({
+  page,
+}) => {
+  await page.goto('/gallery');
+  const photographs = page.locator('.gallery-image-button');
+  await expect(photographs).toHaveCount(8);
+  await photographs.first().click();
+  const viewer = page.getByRole('dialog');
+  await expect(viewer).toBeVisible();
+  const firstTitle = await viewer.locator('h2').textContent();
+  await page.keyboard.press('ArrowRight');
+  await expect(viewer.locator('h2')).not.toHaveText(firstTitle!);
+  await page.keyboard.press('ArrowLeft');
+  await expect(viewer.locator('h2')).toHaveText(firstTitle!);
+  await page.keyboard.press('Escape');
+  await expect(viewer).not.toBeVisible();
+  await expect(photographs.first()).toBeFocused();
+  await page
+    .locator('.gallery-toolbar')
+    .getByRole('link', { name: 'Weddings', exact: true })
+    .click();
+  await expect(page.locator('.gallery-image-button')).toHaveCount(2);
+  const broken = await page
+    .locator('main img')
+    .evaluateAll((images) =>
+      images.some(
+        (image) =>
+          !(image as HTMLImageElement).complete || (image as HTMLImageElement).naturalWidth === 0,
+      ),
+    );
+  expect(broken).toBe(false);
+});

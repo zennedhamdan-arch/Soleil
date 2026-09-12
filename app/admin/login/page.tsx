@@ -15,8 +15,8 @@ export default async function Login() {
     <main className="login-page" id="main-content">
       <div className="login-art">
         <Image
-          src="/garden-illustration.svg"
-          alt="Decorative botanical garden illustration"
+          src="/images/soleil/venue-12.jpg"
+          alt="White drapes and flowers framing the walkway at Soleil Garden"
           fill
           sizes="50vw"
           priority
