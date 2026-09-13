@@ -8,10 +8,10 @@ import { Button } from './ui/button';
 import { useHydrated } from '@/lib/use-hydrated';
 const links = [
   ['Home', '/'],
-  ['Our Events', '/events'],
+  ['Events', '/events'],
   ['Weddings', '/weddings'],
   ['Gallery', '/gallery'],
-  ['About Us', '/about'],
+  ['About', '/about'],
   ['Contact', '/contact'],
 ];
 export function Header() {

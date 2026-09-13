@@ -51,10 +51,12 @@ export default async function PublicLayout({ children }: { children: React.React
             <div>
               <h4>Discover</h4>
               <div className="footer-links">
-                <Link href="/about">Our Garden</Link>
-                <Link href="/events">Our Events</Link>
+                <Link href="/">Home</Link>
+                <Link href="/about">About</Link>
+                <Link href="/events">Events</Link>
                 <Link href="/weddings">Weddings</Link>
                 <Link href="/gallery">Gallery</Link>
+                <Link href="/contact">Contact</Link>
               </div>
             </div>
             <div>

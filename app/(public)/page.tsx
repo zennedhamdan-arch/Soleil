@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { ArrowUpRight, MapPin, Leaf, Sun, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ServiceCards, VenueArt, GalleryGrid, EventCTA } from '@/components/public-ui';
@@ -43,18 +42,6 @@ export default async function Home() {
             <div className="hero-photo-main">
               <VenueArt image={images[0]} priority />
             </div>
-            {images[1] && (
-              <div className="hero-photo-inset">
-                <Image
-                  src={images[1].image_url}
-                  alt={images[1].title}
-                  fill
-                  sizes="(max-width:580px) 42vw, 235px"
-                  priority
-                />
-                <span>A GLIMPSE OF SOLEIL</span>
-              </div>
-            )}
             {images.length > 0 && (
               <div className="hero-photo-label">
                 <span>SOLEIL GARDEN</span>

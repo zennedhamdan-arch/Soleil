@@ -1,14 +1,14 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+import { VenueImage } from '@/components/venue-image';
 import { toast } from 'sonner';
 import { Upload, LoaderCircle, ImagePlus } from 'lucide-react';
 import { Button } from './ui/button';
 import { adminRequest } from './admin-actions';
 import type { Service, GalleryImage, Settings } from '@/lib/types';
 import { serviceSchema, gallerySchema, settingsSchema } from '@/lib/validation';
-import { venuePhotos, isBundledVenuePhoto } from '@/lib/venue-photos';
+import { venuePhotos, isBundledVenuePhoto, resolveVenueImage } from '@/lib/venue-photos';
 export function ImageUpload({
   value,
   onChange,
@@ -24,12 +24,12 @@ export function ImageUpload({
       </label>
       {value && (
         <div className="relative h-44 w-full mb-3 rounded overflow-hidden">
-          <Image
+          <VenueImage
             src={value}
             alt="Selected image preview"
             fill
-            sizes="600px"
-            style={{ objectFit: 'cover' }}
+            sizes="(max-width:800px) 90vw, 700px"
+            style={{ objectFit: 'contain' }}
           />
         </div>
       )}
@@ -71,16 +71,16 @@ export function ImageUpload({
         }}
       />
       <div className="form-field mt-4">
-        <label htmlFor="existing-venue-photo">Or choose a supplied Soleil photograph</label>
+        <label htmlFor="existing-venue-photo">Or choose a supplied AI-enhanced image</label>
         <select
           id="existing-venue-photo"
-          value={isBundledVenuePhoto(value) ? value : ''}
+          value={isBundledVenuePhoto(value) ? resolveVenueImage(value) : ''}
           disabled={busy}
           onChange={(event) => {
             if (event.target.value) onChange(event.target.value);
           }}
         >
-          <option value="">Choose from the repository photographs</option>
+          <option value="">Choose from the selected enhanced images</option>
           {venuePhotos.map((photo) => (
             <option key={photo.id} value={photo.image_url}>
               {photo.title}
@@ -90,14 +90,15 @@ export function ImageUpload({
       </div>
       <p className="text-[10px] mt-2">
         JPEG, PNG or WebP, up to 4 MB. Automatically resized and converted to WebP. Upload only
-        images you have permission to use.
+        images you have permission to use. Repository selections are AI-enhanced and are labelled on
+        the website.
       </p>
     </div>
   );
 }
 export function ServiceForm({ service }: { service?: Service }) {
   const router = useRouter();
-  const [image, setImage] = useState(service?.image_url || ''),
+  const [image, setImage] = useState(resolveVenueImage(service?.image_url || '')),
     [busy, setBusy] = useState(false),
     [error, setError] = useState('');
   return (
@@ -184,7 +185,7 @@ export function ServiceForm({ service }: { service?: Service }) {
 }
 export function GalleryForm({ image: existing }: { image?: GalleryImage }) {
   const router = useRouter();
-  const [image, setImage] = useState(existing?.image_url || ''),
+  const [image, setImage] = useState(resolveVenueImage(existing?.image_url || '')),
     [busy, setBusy] = useState(false),
     [error, setError] = useState('');
   return (

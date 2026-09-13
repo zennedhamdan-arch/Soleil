@@ -2,7 +2,7 @@
 
 A Next.js 16 application for a Kigali garden event venue: public website, five-step event enquiries, database-backed availability, Supabase authentication, and a protected venue-management workspace.
 
-**This repository contains the application, not a provisioned Supabase project.** No Supabase credentials were supplied. Eight real owner-supplied JPG photographs have now been imported from `main`. Without Supabase, public informational pages and the supplied photograph collection remain usable, while enquiries/authentication fail closed. There are no demo bookings, fabricated metrics, stock venue photographs, or pretend availability.
+**This repository contains the application, not a provisioned Supabase project.** No Supabase credentials were supplied. Eight real owner-supplied JPG originals were imported from `main`. The user subsequently selected their AI-enhanced versions from `design/ai-previews`; the site now uses optimized, explicitly labelled derivatives and retains the originals for comparison. Without Supabase, informational pages and the selected image collection remain usable, while enquiries/authentication fail closed. See [the current asset audit](docs/ASSET-QUALITY-AUDIT.md), including the pending official-logo replacement. There are no demo bookings, fabricated metrics, stock venue photographs, or pretend availability.
 
 ## Stack
 
@@ -30,7 +30,7 @@ The application listens on `0.0.0.0:3000`. Preview hosts under `*.e2b.app` and l
 ## Connect Supabase
 
 1. Create a Supabase project (use a separate staging project for testing).
-2. Apply the SQL files in **`supabase/migrations/` in timestamp order** in Supabase SQL Editor. Run the initial migration once against a new project; existing installations should apply only the new photo migration. It creates tables, constraints, functions, RLS policies, Storage policies, the `venue` bucket, all eleven requested services, and the supplied public business details. The second migration seeds the eight owner-supplied photographs and service image assignments. Neither migration inserts bookings, availability, prices, amenities, capacity or testimonials.
+2. Apply the SQL files in **`supabase/migrations/` in timestamp order** in Supabase SQL Editor. Run the initial migration once against a new project; existing installations should apply only the new photo migration. It creates tables, constraints, functions, RLS policies, Storage policies, the `venue` bucket, all eleven requested services, and the supplied public business details. The second migration seeds the eight owner-supplied originals and service image assignments; the latest data-only migration updates their URLs in place to the user-selected enhanced derivatives. Neither migration inserts bookings, availability, prices, amenities, capacity or testimonials.
 3. Set the environment variables below.
 4. Create a user in **Supabase → Authentication → Users**. Confirm the staff email through your administrative workflow. Do not add an admin registration form to the public site.
 5. Copy that user's UUID and run:
@@ -42,7 +42,7 @@ values ('REPLACE_WITH_AUTH_USER_UUID', 'REPLACE_WITH_STAFF_NAME', 'admin');
 
 Use `manager` for a staff account that can manage bookings, blocks, services and images but cannot change site settings. Profiles/roles can only be provisioned with privileged database access; users cannot promote themselves. Disable public Auth signups in the Supabase dashboard if not needed elsewhere.
 
-6. Open `/admin/login`, sign in, then review the imported Soleil Garden photographs under Gallery. Replace the thumbnail-size files with higher-resolution originals when available. Use descriptive image titles. Set order `0` for your strongest hero image. The first active gallery image is used as the home hero. Add wedding-category photos for the wedding page, and select/upload images for each service.
+6. Open `/admin/login`, sign in, then review the selected images under Gallery. AI-enhanced derivatives are labelled on the site; replace them with high-resolution authentic originals when available. Use descriptive image titles. Set order `0` for your strongest hero image. The first active gallery image is used as the home hero. Add wedding-category photos for the wedding page, and select/upload images for each service.
 
 ### Environment variables
 
@@ -152,4 +152,4 @@ public/             Owner-supplied JPG photographs and illustration fallback
  docs/              Architecture, operations and deployment acceptance
 ```
 
-No live Supabase credentials, real admin accounts or customer booking records are included in the repository. The eight venue photographs are owner-supplied assets imported from main.
+No live Supabase credentials, real admin accounts or customer booking records are included. The original JPGs are owner-supplied; the currently selected enhanced images are AI-generated derivatives, not new documentary photographs.

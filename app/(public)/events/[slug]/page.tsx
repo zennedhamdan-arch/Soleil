@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
+import { VenueImage } from '@/components/venue-image';
 import Link from 'next/link';
 import { ArrowUpRight, Leaf } from 'lucide-react';
 import { getServices } from '@/lib/data';
@@ -18,9 +18,9 @@ export default async function Event({ params }: { params: Promise<{ slug: string
     <div className="container pb-20">
       <PageHeading eyebrow="Our events" title={s.name} description={s.description} />
       <div className="two-col">
-        <div className="relative min-h-[400px] rounded-md overflow-hidden">
+        <div className="asset-detail-image">
           {s.image_url ? (
-            <Image
+            <VenueImage
               src={s.image_url}
               alt={s.name}
               fill

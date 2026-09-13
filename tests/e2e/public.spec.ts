@@ -60,7 +60,7 @@ test('mobile menu supports navigation', async ({ page, isMobile }) => {
   await expect(page.getByRole('navigation', { name: 'Mobile navigation' })).toBeVisible();
   await page
     .getByRole('navigation', { name: 'Mobile navigation' })
-    .getByRole('link', { name: 'Our Events' })
+    .getByRole('link', { name: 'Events' })
     .click();
   await expect(page).toHaveURL(/\/events$/);
   await expect(page.getByRole('button', { name: 'Open menu' })).toBeVisible();

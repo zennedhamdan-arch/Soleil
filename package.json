@@ -11,7 +11,9 @@
     "typecheck": "tsc --noEmit",
     "test:e2e": "playwright test",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "images:prepare": "node scripts/prepare-venue-images.mjs",
+    "images:audit": "node scripts/audit-venue-assets.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",

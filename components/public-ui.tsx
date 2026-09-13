@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { VenueImage } from '@/components/venue-image';
 import { PhotoGallery } from './photo-gallery';
 import Link from 'next/link';
 import { ArrowUpRight, Leaf, MapPin, Phone, MessageCircle } from 'lucide-react';
@@ -36,7 +36,7 @@ export function VenueArt({
 }) {
   return (
     <>
-      <Image
+      <VenueImage
         src={image?.image_url || '/garden-illustration.svg'}
         alt={
           image?.title || 'Botanical illustration of a sunlit garden, not a photograph of the venue'
@@ -61,7 +61,12 @@ export function ServiceCards({ services }: { services: Service[] }) {
             aria-label={`Explore ${s.name}`}
           >
             {s.image_url ? (
-              <Image src={s.image_url} alt={s.name} fill sizes="(max-width:580px) 100vw, 33vw" />
+              <VenueImage
+                src={s.image_url}
+                alt={s.name}
+                fill
+                sizes="(max-width:580px) 100vw, 33vw"
+              />
             ) : (
               <div className="photo-placeholder">
                 <Leaf size={48} strokeWidth={0.8} />

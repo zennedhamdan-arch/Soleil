@@ -2193,3 +2193,193 @@ svg {
   letter-spacing: 1.5px;
   white-space: nowrap;
 }
+
+/* Asset-quality update: wide hero, original proportions, truthful provenance. */
+:root {
+  --gold: #ad8535;
+}
+.brand-icon {
+  color: var(--gold);
+}
+.hero-photographs .hero-photo-main {
+  inset: 55px 0 105px;
+  border-radius: 5px 80px 5px 5px;
+}
+.hero-photographs .hero-photo-main img {
+  object-fit: contain;
+  filter: none;
+}
+.hero-photographs::before {
+  top: 41px;
+  right: -13px;
+  bottom: 119px;
+  width: 100%;
+  border-radius: 5px 80px 5px 5px;
+}
+.hero-photographs .round-seal {
+  left: auto;
+  right: 8px;
+  top: -5px;
+}
+.hero-photo-label {
+  bottom: 35px;
+}
+.hero-photographs .hero-badge {
+  left: 0;
+  bottom: 20px;
+}
+.venue-image-disclosure {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 2;
+  padding: 4px 7px;
+  border-radius: 3px;
+  color: #fffbed;
+  background: #1d342be8;
+  font:
+    9px/1.4 Arial,
+    sans-serif;
+  letter-spacing: 0.15px;
+  pointer-events: none;
+}
+.photo-provenance {
+  display: grid;
+  gap: 6px;
+  font:
+    11px/1.6 Arial,
+    sans-serif;
+  color: #707b65;
+  margin-top: 12px;
+  max-width: 420px;
+}
+.photo-provenance a {
+  color: #294738;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.gallery-image-button img,
+.wedding-art img,
+.login-art img {
+  filter: none;
+}
+.wedding-art {
+  background: #233e31;
+}
+.wedding-art img {
+  object-fit: contain;
+}
+.service-card .card-media {
+  aspect-ratio: 4/3;
+  height: auto;
+  background: #e9ece2;
+}
+.card-media img {
+  object-fit: contain;
+}
+.image-admin-card .image {
+  background: #eef0e6;
+}
+.image-admin-card img {
+  object-fit: contain;
+}
+.asset-detail-image {
+  position: relative;
+  aspect-ratio: 4/3;
+  border-radius: 7px;
+  overflow: hidden;
+  background: #e9ece2;
+  align-self: start;
+}
+.asset-detail-image img {
+  object-fit: contain;
+}
+.asset-about-image {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: 5px 80px 5px 5px;
+  background: #e9ece2;
+  align-self: center;
+}
+.asset-about-image img {
+  object-fit: contain;
+}
+.login-art img {
+  object-fit: contain;
+  opacity: 1;
+}
+.login-art::after {
+  background: linear-gradient(180deg, transparent 48%, #163721ed);
+}
+.login-art > .venue-image-disclosure {
+  top: 20px;
+  bottom: auto;
+}
+@media (max-width: 1100px) {
+  .hero-photographs .hero-photo-main {
+    inset: 62px 0 110px;
+  }
+  .hero-photographs::before {
+    top: 48px;
+    bottom: 124px;
+  }
+}
+@media (max-width: 800px) {
+  .hero-photographs {
+    height: 380px;
+  }
+  .hero-photographs .hero-photo-main {
+    inset: 65px 0 90px;
+    border-radius: 4px 48px 4px 4px;
+  }
+  .hero-photographs::before {
+    top: 53px;
+    bottom: 102px;
+    border-radius: 4px 48px 4px 4px;
+  }
+  .hero-photographs .round-seal {
+    top: 1px;
+  }
+  .hero-photographs .hero-badge {
+    bottom: 17px;
+    left: 0;
+  }
+}
+@media (max-width: 580px) {
+  .hero-photographs {
+    height: 350px;
+    margin: 3px 10px 0 0;
+  }
+  .hero-photographs .hero-photo-main {
+    inset: 30px 0 80px;
+  }
+  .hero-photographs::before {
+    top: 20px;
+    bottom: 91px;
+    right: -10px;
+  }
+  .hero-photographs .round-seal {
+    top: -20px;
+    right: 4px;
+    width: 58px;
+    height: 58px;
+  }
+  .hero-photographs .round-seal span {
+    font-size: 5px;
+  }
+  .hero-photographs .round-seal svg {
+    width: 20px;
+    height: 20px;
+  }
+  .hero-photographs .hero-badge {
+    left: 0;
+    bottom: 9px;
+  }
+  .wedding-art {
+    min-height: 250px;
+  }
+  .asset-about-image {
+    border-radius: 4px 48px 4px 4px;
+  }
+}

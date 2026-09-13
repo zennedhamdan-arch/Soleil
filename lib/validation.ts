@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { isFutureDate } from './dates';
-import { isBundledVenuePhoto } from './venue-photos';
+import { isBundledVenuePhoto, resolveVenueImage } from './venue-photos';
 export const futureDate = z
   .string()
   .refine((v) => isFutureDate(v), 'Choose tomorrow or a later date in Kigali.');
@@ -32,20 +32,22 @@ export const enquirySchema = bookingSchema.extend({
 export type BookingInput = z.infer<typeof bookingSchema>;
 export const loginSchema = z.object({ email: z.email(), password: z.string().min(1).max(200) });
 export const statusSchema = z.enum(['pending', 'approved', 'rejected', 'cancelled']);
-const imageUrl = z.union([
-  z.literal(''),
-  z.string().refine(isBundledVenuePhoto, 'Choose an existing venue photograph.'),
-  z.url().refine((v) => {
-    try {
-      return (
-        new URL(v).origin === new URL(process.env.NEXT_PUBLIC_SUPABASE_URL!).origin &&
-        new URL(v).pathname.startsWith('/storage/v1/object/public/venue/')
-      );
-    } catch {
-      return false;
-    }
-  }, 'Use an image uploaded to venue storage.'),
-]);
+const imageUrl = z
+  .union([
+    z.literal(''),
+    z.string().refine(isBundledVenuePhoto, 'Choose an existing venue photograph.'),
+    z.url().refine((v) => {
+      try {
+        return (
+          new URL(v).origin === new URL(process.env.NEXT_PUBLIC_SUPABASE_URL!).origin &&
+          new URL(v).pathname.startsWith('/storage/v1/object/public/venue/')
+        );
+      } catch {
+        return false;
+      }
+    }, 'Use an image uploaded to venue storage.'),
+  ])
+  .transform(resolveVenueImage);
 export const serviceSchema = z.object({
   name: z.string().trim().min(2).max(100),
   slug: z

@@ -3,6 +3,7 @@ const config: NextConfig = {
   poweredByHeader: false,
   allowedDevOrigins: ['127.0.0.1', 'localhost', '*.e2b.app'],
   images: {
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: process.env.NEXT_PUBLIC_SUPABASE_URL
       ? [
           {
