@@ -2,7 +2,7 @@
 
 A Next.js 16 application for a Kigali garden event venue: public website, five-step event enquiries, database-backed availability, Supabase authentication, and a protected venue-management workspace.
 
-**This repository contains the application, not a provisioned Supabase project.** No Supabase credentials were supplied. Eight real owner-supplied JPG originals were imported from `main`. The user subsequently selected their AI-enhanced versions from `design/ai-previews`; the site now uses optimized, explicitly labelled derivatives and retains the originals for comparison. Without Supabase, informational pages and the selected image collection remain usable, while enquiries/authentication fail closed. See [the current asset audit](docs/ASSET-QUALITY-AUDIT.md), including the pending official-logo replacement. There are no demo bookings, fabricated metrics, stock venue photographs, or pretend availability.
+**This repository contains the application, not a provisioned Supabase project.** No Supabase credentials were supplied. Eight real owner-supplied JPG originals were imported from `main`. The user subsequently selected their AI-enhanced versions from `design/ai-previews`; the site now uses optimized, explicitly labelled derivatives and retains the originals for comparison. Without Supabase, informational pages and the selected image collection remain usable, while enquiries/authentication fail closed. See [the current asset audit](docs/ASSET-QUALITY-AUDIT.md), and [official brand implementation](docs/BRAND-ASSETS.md). The provided logo is now installed across the shared branding and browser/app icons. There are no demo bookings, fabricated metrics, stock venue photographs, or pretend availability.
 
 ## Stack
 

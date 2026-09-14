@@ -1,6 +1,6 @@
 # Owner-supplied originals and current image derivatives
 
-**Current update:** The owner selected `design/ai-previews` for replacement imagery. The site now displays labelled, optimized AI-enhanced derivatives, while retaining all original JPGs below for provenance. See [the asset-quality audit](ASSET-QUALITY-AUDIT.md) and apply `202609130001_selected_image_replacements.sql` after the prior migrations. No cleaned official-logo file was accessible; logo replacement remains pending.
+**Current update:** The owner selected `design/ai-previews` for replacement imagery. The site now displays labelled, optimized AI-enhanced derivatives, while retaining all original JPGs below for provenance. See [the asset-quality audit](ASSET-QUALITY-AUDIT.md) and apply `202609130001_selected_image_replacements.sql` after the prior migrations. The official logo is now installed from `public/images/soleil/soleil-garden.png`; see [brand assets](BRAND-ASSETS.md).
 
 The inventory below documents the original source import, not the dimensions of the current displayed derivatives.
 

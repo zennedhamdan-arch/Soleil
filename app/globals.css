@@ -196,8 +196,13 @@ svg {
   align-items: center;
   gap: 10px;
 }
-.brand-icon {
-  color: #8b804e;
+.brand-mark {
+  display: block;
+  width: 52px;
+  height: 52px;
+  aspect-ratio: 1;
+  object-fit: contain;
+  flex: 0 0 auto;
 }
 .brand-name {
   font-family: Georgia, serif;
@@ -908,8 +913,16 @@ svg {
   padding: 32px 22px;
   z-index: 50;
 }
+.admin-sidebar .brand {
+  gap: 8px;
+}
+.admin-sidebar .brand-mark {
+  width: 44px;
+  height: 44px;
+}
 .admin-sidebar .brand-name {
-  font-size: 26px;
+  font-size: 24px;
+  letter-spacing: 2.5px;
 }
 .admin-sidebar .brand-sub {
   font-size: 7px;
@@ -1392,6 +1405,10 @@ svg {
   }
   .site-header {
     height: 80px;
+  }
+  .brand-mark {
+    width: 46px;
+    height: 46px;
   }
   .brand-name {
     font-size: 26px;
@@ -2197,9 +2214,6 @@ svg {
 /* Asset-quality update: wide hero, original proportions, truthful provenance. */
 :root {
   --gold: #ad8535;
-}
-.brand-icon {
-  color: var(--gold);
 }
 .hero-photographs .hero-photo-main {
   inset: 55px 0 105px;

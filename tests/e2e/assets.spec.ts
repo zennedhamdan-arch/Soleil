@@ -5,7 +5,7 @@ for (const route of ['/', '/weddings', '/gallery', '/about', '/admin/login']) {
     page,
   }) => {
     await page.goto(route);
-    const images = page.locator('main img');
+    const images = page.locator('main img:not(.brand-mark)');
     expect(await images.count()).toBeGreaterThan(0);
     for (const image of await images.all()) {
       if (!(await image.isVisible())) continue;

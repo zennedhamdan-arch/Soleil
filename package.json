@@ -13,7 +13,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "images:prepare": "node scripts/prepare-venue-images.mjs",
-    "images:audit": "node scripts/audit-venue-assets.mjs"
+    "images:audit": "node scripts/audit-venue-assets.mjs",
+    "brand:prepare": "node scripts/prepare-brand-assets.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
