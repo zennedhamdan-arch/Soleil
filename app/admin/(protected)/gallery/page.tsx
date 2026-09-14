@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { VenueImage } from '@/components/venue-image';
 import Link from 'next/link';
 import { Plus } from 'lucide-react';
 import { notFound } from 'next/navigation';
@@ -53,7 +53,7 @@ export default async function Gallery({
               {data.map((i) => (
                 <article className="image-admin-card bg-white" key={i.id}>
                   <div className="image">
-                    <Image
+                    <VenueImage
                       src={i.image_url}
                       alt={i.title}
                       fill

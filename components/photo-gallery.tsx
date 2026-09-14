@@ -1,8 +1,9 @@
 'use client';
 import { useRef, useState } from 'react';
-import Image from 'next/image';
+import { VenueImage } from '@/components/venue-image';
 import { ArrowUpRight, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import type { GalleryImage } from '@/lib/types';
+import { originalVenueImage } from '@/lib/venue-photos';
 import { Button } from './ui/button';
 
 export function PhotoGallery({ images }: { images: GalleryImage[] }) {
@@ -27,11 +28,12 @@ export function PhotoGallery({ images }: { images: GalleryImage[] }) {
                 dialog.current?.showModal();
               }}
             >
-              <Image
+              <VenueImage
                 src={image.image_url}
                 alt={image.title}
                 fill
                 sizes="(max-width:580px) 90vw, (max-width:800px) 45vw, 30vw"
+                style={{ objectFit: 'contain' }}
               />
               <span className="photo-category">{image.category}</span>
               <span className="photo-expand">
@@ -75,7 +77,7 @@ export function PhotoGallery({ images }: { images: GalleryImage[] }) {
           </Button>
         </div>
         <div className="photo-dialog-image">
-          <Image
+          <VenueImage
             src={photo.image_url}
             alt={photo.title}
             fill
@@ -89,6 +91,18 @@ export function PhotoGallery({ images }: { images: GalleryImage[] }) {
               {photo.category} · {selected + 1} / {images.length}
             </p>
             <h2 id="photo-dialog-title">{photo.title}</h2>
+            {originalVenueImage(photo.image_url) && (
+              <div className="photo-provenance">
+                <span>AI-enhanced from the supplied photograph; recreated details may differ.</span>
+                <a
+                  href={originalVenueImage(photo.image_url)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View original source ↗
+                </a>
+              </div>
+            )}
           </div>
           <div className="flex gap-2">
             <Button

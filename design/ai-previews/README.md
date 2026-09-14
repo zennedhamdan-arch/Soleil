@@ -1,4 +1,4 @@
-# AI-enhanced photograph previews — not published to the website
+# AI-enhanced photograph sources and provenance
 
 All eight owner-supplied photographs have now been regenerated as separate AI-enhanced previews from the small JPGs imported from `origin/main`.
 
@@ -22,4 +22,4 @@ The six landscape previews are 1,214 × 864 pixels; the square table-settings pr
 
 These are **AI-generated reconstructions**, not lossless upscales or exact documentary photographs. Prompts requested preservation of the original venue, composition and objects, but generative restoration can invent or alter details missing from the 163-pixel-wide source images. Framing, surfaces, foliage, flowers and architecture should be checked by the owner before use.
 
-The original JPGs are unchanged. These files are intentionally outside `public/` and are not referenced by the site or database. Regenerating the remaining images does not automatically replace the website photos. Do not publish these previews as unaltered venue photography or claim exact fidelity.
+The original JPGs are unchanged. The user subsequently selected this folder for the asset-quality update. Optimized WebP derivatives now ship under `public/images/soleil/enhanced/` and are identified as AI-enhanced in the site. These large source PNGs remain outside `public/` and are not directly served. See `docs/ASSET-QUALITY-AUDIT.md` for the replacement mapping, data-only migration and remaining logo/authenticity limitations. Do not claim exact fidelity or publish these as unaltered venue photography.

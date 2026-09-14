@@ -323,3 +323,55 @@ describe.sequential('PostgreSQL schema and booking invariants', () => {
     }
   });
 });
+
+describe.sequential('image replacement data migration', () => {
+  it('updates existing URLs without duplicate rows or changes to booking/security data', async () => {
+    const migration = readFileSync(
+      new URL(
+        '../supabase/migrations/202609130001_selected_image_replacements.sql',
+        import.meta.url,
+      ),
+      'utf8',
+    );
+    const beforeBookings = (await db.query('select * from bookings order by id')).rows;
+    const beforeBlocks = (await db.query('select * from blocked_dates order by id')).rows;
+    const beforeGallery = (await db.query<{ id: string }>('select id from gallery order by id'))
+      .rows;
+    const beforeServices = (await db.query<{ id: string }>('select id from services order by id'))
+      .rows;
+    await db.query(
+      "update gallery set sort_order=99, active=false where id='a18ed201-0000-4000-8000-000000000010'",
+    );
+    await db.query(
+      "update services set image_url='https://custom.example/original.webp' where slug='theme-party'",
+    );
+    await db.exec(migration);
+    expect((await db.query('select * from bookings order by id')).rows).toEqual(beforeBookings);
+    expect((await db.query('select * from blocked_dates order by id')).rows).toEqual(beforeBlocks);
+    expect((await db.query('select id from gallery order by id')).rows).toEqual(beforeGallery);
+    expect((await db.query('select id from services order by id')).rows).toEqual(beforeServices);
+    const image = (
+      await db.query<{ active: boolean; sort_order: number; image_url: string }>(
+        "select active,sort_order,image_url from gallery where id='a18ed201-0000-4000-8000-000000000010'",
+      )
+    ).rows[0];
+    expect(image).toEqual({
+      active: false,
+      sort_order: 99,
+      image_url: '/images/soleil/enhanced/venue-entrance.webp',
+    });
+    expect(
+      (
+        await db.query<{ image_url: string }>(
+          "select image_url from services where slug='theme-party'",
+        )
+      ).rows[0].image_url,
+    ).toBe('https://custom.example/original.webp');
+    expect(
+      (await db.query("select id from gallery where image_url ~ '/venue-[0-9]+\\.jpg$'")).rows,
+    ).toHaveLength(0);
+    const after = (await db.query('select * from gallery order by id')).rows;
+    await db.exec(migration);
+    expect((await db.query('select * from gallery order by id')).rows).toEqual(after);
+  });
+});

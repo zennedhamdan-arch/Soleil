@@ -15,7 +15,7 @@ export default async function About() {
         description="Soleil Garden is a garden wedding and event venue in Gikondo, Kigali, Rwanda. A setting for the moments that bring us together."
       />
       <div className="two-col">
-        <div className="relative min-h-[430px] rounded-t-full overflow-hidden">
+        <div className="asset-about-image">
           <VenueArt image={images[0]} />
         </div>
         <div className="panel self-center">

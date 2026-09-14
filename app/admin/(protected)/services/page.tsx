@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import { VenueImage } from '@/components/venue-image';
 import { Plus, Leaf } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { requireAdmin, assertQuery } from '@/lib/admin-data';
@@ -37,7 +37,12 @@ export default async function Services({
             <article className="image-admin-card bg-white" key={s.id}>
               <div className="image">
                 {s.image_url ? (
-                  <Image src={s.image_url} alt={s.name} fill sizes="(max-width:580px)100vw,33vw" />
+                  <VenueImage
+                    src={s.image_url}
+                    alt={s.name}
+                    fill
+                    sizes="(max-width:580px)100vw,33vw"
+                  />
                 ) : (
                   <div className="photo-placeholder">
                     <Leaf size={35} strokeWidth={1} />

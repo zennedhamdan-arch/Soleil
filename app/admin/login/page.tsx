@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import { VenueImage } from '@/components/venue-image';
 import { redirect } from 'next/navigation';
 import { Brand } from '@/components/brand';
 import { LoginForm } from '@/components/login-form';
@@ -14,8 +14,8 @@ export default async function Login() {
   return (
     <main className="login-page" id="main-content">
       <div className="login-art">
-        <Image
-          src="/images/soleil/venue-12.jpg"
+        <VenueImage
+          src="/images/soleil/enhanced/wedding-walkway.webp"
           alt="White drapes and flowers framing the walkway at Soleil Garden"
           fill
           sizes="50vw"
