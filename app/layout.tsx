@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Toaster } from 'sonner';
 import './globals.css';
 export const metadata: Metadata = {
+  manifest: '/manifest.webmanifest',
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://soleilgarden.example'),
   title: {
     default: 'Soleil Garden | Wedding & Event Venue in Kigali',

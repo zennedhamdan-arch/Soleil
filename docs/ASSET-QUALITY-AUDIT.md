@@ -62,11 +62,11 @@ A production preview was checked at **1440 px desktop, 820 px tablet and 390 px 
 
 No Supabase environment is connected in this workspace. Hosted Auth/Storage and authenticated admin workflows therefore cannot be certified from this preview. Do not interpret redirect tests or local PostgreSQL tests as completed live-project acceptance.
 
-## Unfinished: official logo and authentic high-resolution originals
+## Follow-up: official logo installed; photography authenticity remains distinct
 
-The logo was visible in the user's message, but the indicated attachment file was not accessible in the workspace. A search of the latest repository and `design/ai-previews` found no cleaned logo PNG/SVG. The existing shared wordmark/icon has been retained rather than inventing or misrepresenting an official replacement. Official header/footer/admin-logo and favicon installation **remain pending**.
+The original attachment was inaccessible during the image update. The owner subsequently supplied the repository path `public/images/soleil/soleil-garden.png`, and the official transparent PNG has now been installed through the shared Brand component. Header/mobile navigation, footer, admin login/sidebar, favicon, Apple touch icon and manifest icons all use derivatives of that exact source. See [brand assets](BRAND-ASSETS.md) for provenance and verification.
 
-Add the cleaned transparent PNG or SVG to the repository (for example, `public/brand/soleil-garden.png`) so it can be installed and visually verified. The selected AI derivatives improve sharpness but do not satisfy an assertion that all images are unaltered genuine high-resolution venue photographs. Supply original high-resolution photographs if that remains the required final standard.
+The selected venue-image derivatives remain AI-enhanced reconstructions; installing the authentic official logo does not change their source classification. Supply original high-resolution photographs if unaltered documentary venue imagery is required.
 
 ## Repeatable checks
 
